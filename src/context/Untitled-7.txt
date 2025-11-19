@@ -1,0 +1,32 @@
+// c:\Users\Jubayer\OneDrive\Desktop\Next\Project\Connect-It\src\pages\AdminDashboard.tsx
+import React from 'react';
+
+const AdminDashboard = () => {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">অ্যাডমিন ড্যাশবোর্ড</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">প্রোডাক্ট ম্যানেজমেন্ট</h2>
+            <div className="text-gray-700">প্রোডাক্ট তালিকা, মূল্য, স্ট্যাটাস</div>
+          </div>
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">ইউজার ম্যানেজমেন্ট</h2>
+            <div className="text-gray-700">রোল, অ্যাক্সেস, অ্যাকাউন্ট স্ট্যাটাস</div>
+          </div>
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">পেআউটস</h2>
+            <div className="text-gray-700">অ্যাফিলিয়েট/পার্টনার পেআউট রিপোর্ট</div>
+          </div>
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">রিপোর্টস</h2>
+            <div className="text-gray-700">সেলস, কনভার্সন, কোহোর্ট</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminDashboard;

@@ -1,0 +1,31 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Vite build output
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Env files
+.env*
+
+# VSCode
+.vscode/
+
+# Trae IDE temp
+.trae/
+
+# Server
+server/node_modules/
+server/dist/
+
+# Runtime data files (do not commit local test data)
+server/data/users.json
+server/data/withdrawals.json
+
+# OS
+.DS_Store
+Thumbs.db
