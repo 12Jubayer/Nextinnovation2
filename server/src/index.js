@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ origin: '*', methods: ['GET', 'POST'], credentials: false }));
 app.use(express.json());
 
-const dataDir = path.join(__dirname, '..', 'data');
+const dataDir = process.env.DATA_DIR ? process.env.DATA_DIR : path.join(__dirname, '..', 'data');
 const usersFile = path.join(dataDir, 'users.json');
 
 function ensureDataFiles() {
