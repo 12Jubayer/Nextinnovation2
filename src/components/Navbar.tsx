@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, BookOpen } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useAdminAuth } from '../context/AdminAuthContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
+  const { isAdmin } = useAdminAuth();
   const REPO_URL = (
     (import.meta as unknown) as { env?: { VITE_REPO_URL?: string } }
   ).env?.VITE_REPO_URL;
@@ -48,6 +50,9 @@ const Navbar = () => {
                 রিপোজিটরি
               </a>
             )}
+            <Link to={isAdmin ? '/admin/dashboard' : '/admin/login'} className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px">
+              অ্যাডমিন
+            </Link>
             
             
             {user ? (
@@ -101,9 +106,9 @@ const Navbar = () => {
       </div>
       
       {/* Mobile menu, show/hide based on menu state */}
-      {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {isMenuOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link to="/" className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px">
               হোম
             </Link>
@@ -116,16 +121,19 @@ const Navbar = () => {
             <Link to="/course/digital-marketing" className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px">
               ডিজিটাল মার্কেটিং
             </Link>
-            {REPO_URL && (
-              <a
-                href={REPO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px"
-              >
-                রিপোজিটরি
-              </a>
-            )}
+                {REPO_URL && (
+                  <a
+                    href={REPO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px"
+                  >
+                    রিপোজিটরি
+                  </a>
+                )}
+                <Link to={isAdmin ? '/admin/dashboard' : '/admin/login'} className="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px">
+                  অ্যাডমিন
+                </Link>
             {user ? (
               <>
                 <Link to="/dashboard" className="block bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transform transition-all duration-200 hover:scale-105 hover:-translate-y-px">
