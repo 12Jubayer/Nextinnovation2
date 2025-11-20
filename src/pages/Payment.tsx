@@ -261,7 +261,7 @@ const Payment = () => {
                           পেমেন্ট প্রক্রিয়া করা হচ্ছে...
                         </>
                       ) : (
-                        {selectedCourse ? `৳${selectedCourse.price} পেমেন্ট করুন` : 'পেমেন্ট করুন'}
+                        selectedCourse ? `৳${selectedCourse.price} পেমেন্ট করুন` : 'পেমেন্ট করুন'
                       )}
                     </button>
                   </form>

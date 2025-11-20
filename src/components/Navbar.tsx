@@ -9,16 +9,6 @@ const Navbar = () => {
   const REPO_URL = (
     (import.meta as unknown) as { env?: { VITE_REPO_URL?: string } }
   ).env?.VITE_REPO_URL;
-            {REPO_URL && (
-              <a
-                href={REPO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px"
-              >
-                রিপোজিটরি
-              </a>
-            )}
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -48,6 +38,16 @@ const Navbar = () => {
             <Link to="/course/digital-marketing" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px">
               ডিজিটাল মার্কেটিং
             </Link>
+            {REPO_URL && (
+              <a
+                href={REPO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium transform transition-all duration-200 hover:scale-105 hover:-translate-y-px"
+              >
+                রিপোজিটরি
+              </a>
+            )}
             
             
             {user ? (
