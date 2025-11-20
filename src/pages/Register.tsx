@@ -34,14 +34,8 @@ const Register = () => {
     try {
       await register(name, email, password);
       navigate('/payment');
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : 'রেজিস্ট্রেশন ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।';
-      const translated = msg.includes('User already exists')
-        ? 'এই ইমেইলে একটি অ্যাকাউন্ট ইতিমধ্যে রয়েছে। অন্য ইমেইল ব্যবহার করুন।'
-        : msg.includes('Missing required fields')
-        ? 'নাম, ইমেইল ও পাসওয়ার্ড প্রয়োজন।'
-        : msg;
-      setError(translated);
+    } catch {
+      setError('রেজিস্ট্রেশন ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
     } finally {
       setIsLoading(false);
     }

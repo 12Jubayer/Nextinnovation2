@@ -18,9 +18,7 @@ const Payment = () => {
   const [searchParams] = useSearchParams();
   const courseId = searchParams.get('courseId') || '';
   const selectedCourse = getCourseById(courseId || '') || null;
-  const API_BASE = (
-    import.meta as unknown as { env?: { VITE_API_URL?: string } }
-  ).env?.VITE_API_URL || 'http://localhost:5000';
+  const API_BASE = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,9 +44,7 @@ const Payment = () => {
             }
           }
         }
-      } catch (e) {
-        console.error(e);
-      }
+      } catch {}
 
       // Redirect to dashboard after payment success
       setTimeout(() => {
@@ -265,7 +261,7 @@ const Payment = () => {
                           পেমেন্ট প্রক্রিয়া করা হচ্ছে...
                         </>
                       ) : (
-                        (selectedCourse ? `৳${selectedCourse.price} পেমেন্ট করুন` : 'পেমেন্ট করুন')
+                        {selectedCourse ? `৳${selectedCourse.price} পেমেন্ট করুন` : 'পেমেন্ট করুন'}
                       )}
                     </button>
                   </form>

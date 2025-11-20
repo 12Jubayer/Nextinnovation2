@@ -70,7 +70,7 @@ const CoursePage = () => {
                 
                 {user ? (
                   <Link 
-                    to={`/payment?courseId=${course.id}`} 
+                    to="/payment" 
                     className="inline-block bg-white text-blue-600 px-6 py-3 rounded-md font-bold hover:bg-blue-50 transition-colors"
                   >
                     এখনই ভর্তি হন
@@ -174,7 +174,7 @@ const CoursePage = () => {
               
               {user ? (
                 <Link 
-                  to={`/payment?courseId=${course.id}`} 
+                  to="/payment" 
                   className="block w-full bg-blue-600 text-white text-center px-4 py-3 rounded-md font-medium hover:bg-blue-700 transition-colors"
                 >
                   এখনই ভর্তি হন
