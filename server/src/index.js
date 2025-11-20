@@ -70,7 +70,9 @@ app.post('/api/auth/register', async (req, res) => {
       email,
       courses: [],
       role: finalRole,
-      password: hashed
+      password: hashed,
+      loginCount: 0,
+      lastLogin: null
     };
     users.push(user);
     try {
@@ -102,6 +104,11 @@ app.post('/api/auth/login', async (req, res) => {
   if (!ok) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
+  user.loginCount = (user.loginCount || 0) + 1;
+  user.lastLogin = new Date().toISOString();
+  try {
+    writeUsers(users);
+  } catch {}
   const { password: _pw, ...publicUser } = user;
   res.json({ user: publicUser });
 });
@@ -184,6 +191,17 @@ app.get('/api/affiliate/withdraw', (req, res) => {
     return res.status(400).json({ error: 'Missing userId' });
   }
   const items = readWithdrawals().filter(w => w.userId === userId);
+  res.json({ withdrawals: items });
+});
+
+app.get('/api/admin/users', (req, res) => {
+  const users = readUsers();
+  const safe = users.map(({ password, ...u }) => u);
+  res.json({ users: safe });
+});
+
+app.get('/api/admin/withdrawals', (req, res) => {
+  const items = readWithdrawals();
   res.json({ withdrawals: items });
 });
 

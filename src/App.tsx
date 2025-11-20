@@ -19,6 +19,8 @@ import AffiliateRegister from './pages/AffiliateRegister';
 import AffiliateWithdraw from './pages/AffiliateWithdraw';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminUsers from './pages/AdminUsers';
+import AdminWithdrawals from './pages/AdminWithdrawals';
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
               <Route path="/affiliate/withdraw" element={<ProtectedRoute requiredRoles={['affiliate']}><AffiliateWithdraw /></ProtectedRoute>} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/dashboard" element={<AdminProtectedRoute><AdminDashboard /></AdminProtectedRoute>} />
+              <Route path="/admin/users" element={<AdminProtectedRoute><AdminUsers /></AdminProtectedRoute>} />
+              <Route path="/admin/withdrawals" element={<AdminProtectedRoute><AdminWithdrawals /></AdminProtectedRoute>} />
             </Routes>
           </main>
           <Footer />
