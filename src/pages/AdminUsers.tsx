@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Pencil, User, Mars, Venus } from 'lucide-react';
 
 interface User {
   id: string;
@@ -59,9 +61,11 @@ const AdminUsers: React.FC = () => {
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">নাম</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">ইমেইল</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">রোল</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">জেন্ডার</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">কোর্স</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">লগইন</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">লাস্ট লগইন</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">একশন</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -71,9 +75,23 @@ const AdminUsers: React.FC = () => {
                     <td className="px-4 py-2 text-sm text-gray-700">{u.name}</td>
                     <td className="px-4 py-2 text-sm text-gray-700">{u.email}</td>
                     <td className="px-4 py-2 text-sm text-gray-700">{u.role}</td>
+                    <td className="px-4 py-2 text-sm text-gray-700">
+                      {u.gender === 'male' ? (
+                        <Mars className="h-4 w-4 text-blue-600" />
+                      ) : u.gender === 'female' ? (
+                        <Venus className="h-4 w-4 text-pink-600" />
+                      ) : (
+                        <User className="h-4 w-4 text-gray-600" />
+                      )}
+                    </td>
                     <td className="px-4 py-2 text-sm text-gray-700">{u.courses?.length || 0}</td>
                     <td className="px-4 py-2 text-sm text-gray-700">{u.loginCount || 0}</td>
                     <td className="px-4 py-2 text-sm text-gray-700">{u.lastLogin ? new Date(u.lastLogin).toLocaleString() : '-'}</td>
+                    <td className="px-4 py-2 text-sm text-gray-700">
+                      <Link to={`/student/${u.id}`} className="inline-flex items-center text-blue-600 hover:text-blue-800">
+                        <Pencil className="h-4 w-4 mr-1" /> Edit
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>

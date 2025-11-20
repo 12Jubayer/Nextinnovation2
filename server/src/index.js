@@ -71,6 +71,7 @@ app.post('/api/auth/register', async (req, res) => {
       courses: [],
       role: finalRole,
       password: hashed,
+      gender: null,
       loginCount: 0,
       lastLogin: null
     };
@@ -194,6 +195,30 @@ app.get('/api/affiliate/withdraw', (req, res) => {
   res.json({ withdrawals: items });
 });
 
+app.get('/api/users/:id', (req, res) => {
+  const { id } = req.params || {};
+  const users = readUsers();
+  const user = users.find(u => u.id === id);
+  if (!user) return res.status(404).json({ error: 'User not found' });
+  const { password: _pw, ...publicUser } = user;
+  res.json({ user: publicUser });
+});
+
+app.put('/api/users/:id', (req, res) => {
+  const { id } = req.params || {};
+  const { name, gender } = req.body || {};
+  const users = readUsers();
+  const idx = users.findIndex(u => u.id === id);
+  if (idx === -1) return res.status(404).json({ error: 'User not found' });
+  const user = users[idx];
+  if (typeof name === 'string' && name.trim()) user.name = name.trim();
+  if (gender === 'male' || gender === 'female' || gender === null) user.gender = gender;
+  users[idx] = user;
+  writeUsers(users);
+  const { password: _pw, ...publicUser } = user;
+  res.json({ user: publicUser });
+});
+
 app.get('/api/admin/users', (req, res) => {
   const users = readUsers();
   const safe = users.map(({ password, ...u }) => u);
@@ -203,6 +228,16 @@ app.get('/api/admin/users', (req, res) => {
 app.get('/api/admin/withdrawals', (req, res) => {
   const items = readWithdrawals();
   res.json({ withdrawals: items });
+});
+
+app.post('/api/admin/withdrawals/:id/approve', (req, res) => {
+  const { id } = req.params || {};
+  const items = readWithdrawals();
+  const idx = items.findIndex(w => w.id === id);
+  if (idx === -1) return res.status(404).json({ error: 'Not found' });
+  items[idx].status = 'approved';
+  writeWithdrawals(items);
+  res.json({ withdrawal: items[idx] });
 });
 
 app.use((err, req, res, next) => {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Check } from 'lucide-react';
 
 interface Withdrawal {
   id: string;
@@ -29,6 +30,14 @@ const AdminWithdrawals: React.FC = () => {
     load();
   }, [API_BASE]);
 
+  const approve = async (id: string) => {
+    const res = await fetch(`${API_BASE}/api/admin/withdrawals/${id}/approve`, { method: 'POST' });
+    if (res.ok) {
+      const d = await res.json();
+      setItems(prev => prev.map(x => x.id === id ? d.withdrawal : x));
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,6 +55,7 @@ const AdminWithdrawals: React.FC = () => {
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Method</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -57,6 +67,13 @@ const AdminWithdrawals: React.FC = () => {
                     <td className="px-4 py-2 text-sm text-gray-700">{w.method}</td>
                     <td className="px-4 py-2 text-sm text-gray-700">{w.status}</td>
                     <td className="px-4 py-2 text-sm text-gray-700">{new Date(w.createdAt).toLocaleString()}</td>
+                    <td className="px-4 py-2 text-sm">
+                      {w.status === 'pending' && (
+                        <button onClick={() => approve(w.id)} className="inline-flex items-center bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                          <Check className="h-4 w-4 mr-1" /> Approve
+                        </button>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

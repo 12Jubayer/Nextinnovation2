@@ -21,6 +21,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminUsers from './pages/AdminUsers';
 import AdminWithdrawals from './pages/AdminWithdrawals';
+import StudentProfile from './pages/StudentProfile';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
               <Route path="/admin/dashboard" element={<AdminProtectedRoute><AdminDashboard /></AdminProtectedRoute>} />
               <Route path="/admin/users" element={<AdminProtectedRoute><AdminUsers /></AdminProtectedRoute>} />
               <Route path="/admin/withdrawals" element={<AdminProtectedRoute><AdminWithdrawals /></AdminProtectedRoute>} />
+              <Route path="/student/:id" element={<ProtectedRoute><StudentProfile /></ProtectedRoute>} />
             </Routes>
           </main>
           <Footer />
